@@ -1,0 +1,17 @@
+package it.ur3.siw.model.enums;
+
+public enum UserRole {
+	ROLE_DEFAULT("DEFAULT"),	// Utente default ancora non registrato
+	ROLE_USER("USER"),			// Utente registrato
+	ROLE_ADMIN("ADMIN");		// Utente con privilegi da amministratore
+	
+	private String role;
+	
+	UserRole(String string) {
+		this.role = string;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+}
