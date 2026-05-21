@@ -1,11 +1,17 @@
 package it.ur3.siw.model;
 
+import java.util.List;
+import java.util.Objects;
+
 import it.ur3.siw.validation.NotFutureYear;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,6 +38,14 @@ public class Torneo {
 	private String descrizione;
 
 	/* ASSOCIAZIONI */
+	
+	// Associazione con una o più squadre
+	@ManyToMany
+	private List<Squadra> squadrePartecipanti;
+	
+	// Associazione con una o più partite
+	@OneToMany(mappedBy = "torneoDiAppartenenza")
+	private List<Partita> partiteDelTorneo;
 	
 	/* GETTERS E SETTERS */
 	
@@ -61,5 +75,40 @@ public class Torneo {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public List<Squadra> getSquadrePartecipanti() {
+		return squadrePartecipanti;
+	}
+
+	public void setSquadrePartecipanti(List<Squadra> squadrePartecipanti) {
+		this.squadrePartecipanti = squadrePartecipanti;
+	}
+
+	public List<Partita> getPartiteDelTorneo() {
+		return partiteDelTorneo;
+	}
+
+	public void setPartiteDelTorneo(List<Partita> partiteDelTorneo) {
+		this.partiteDelTorneo = partiteDelTorneo;
+	}
+	
+	/* EQUALS E HASHCODE */
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Torneo other = (Torneo) obj;
+		return Objects.equals(id, other.id);
 	}
 }

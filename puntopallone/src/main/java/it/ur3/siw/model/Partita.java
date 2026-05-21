@@ -1,11 +1,13 @@
 package it.ur3.siw.model;
 
 import java.time.Instant;
+import java.util.Objects;
 
 import it.ur3.siw.model.enums.PlayerRole;
 import it.ur3.siw.model.enums.Stato;
 import it.ur3.siw.validation.ValidGoals;
 import it.ur3.siw.validation.ValidMatchDate;
+import it.ur3.siw.validation.ValidSquadreDiverse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +15,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +23,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @ValidMatchDate
 @ValidGoals
+@ValidSquadreDiverse
 public class Partita {
 
 	/* ATTRIBUTI */
@@ -48,6 +52,22 @@ public class Partita {
 	private Stato stato;
 	
 	/* ASSOCIAZIONI */
+	
+	// Associazione con un singolo torneo
+	@NotNull
+	@ManyToOne
+	private Torneo torneoDiAppartenenza;
+	
+	// Associazione con due squadre
+	@ManyToOne
+	private Squadra squadraInCasa;
+	@ManyToOne
+	private Squadra squadraInTrasferta;
+		
+	// Associazione con un arbitro
+	@NotNull
+	@ManyToOne
+	private Arbitro arbitroInCarica;
 
 	/* GETTERS E SETTERS */
 	
@@ -94,4 +114,57 @@ public class Partita {
 	public void setStato(Stato stato) {
 		this.stato = stato;
 	}
+
+	public Squadra getSquadraInCasa() {
+		return squadraInCasa;
+	}
+
+	public void setSquadraInCasa(Squadra squadraInCasa) {
+		this.squadraInCasa = squadraInCasa;
+	}
+
+	public Squadra getSquadraInTrasferta() {
+		return squadraInTrasferta;
+	}
+
+	public void setSquadraInTrasferta(Squadra squadraInTrasferta) {
+		this.squadraInTrasferta = squadraInTrasferta;
+	}
+
+	public Torneo getTorneoDiAppartenenza() {
+		return torneoDiAppartenenza;
+	}
+
+	public void setTorneoDiAppartenenza(Torneo torneoDiAppartenenza) {
+		this.torneoDiAppartenenza = torneoDiAppartenenza;
+	}
+
+	public Arbitro getArbitroInCarica() {
+		return arbitroInCarica;
+	}
+
+	public void setArbitroInCarica(Arbitro arbitroInCarica) {
+		this.arbitroInCarica = arbitroInCarica;
+	}
+	
+	/* EQUALS E HASHCODE */
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Partita other = (Partita) obj;
+		return Objects.equals(id, other.id);
+	}
+	
+	
 }
