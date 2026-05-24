@@ -30,7 +30,9 @@
 		</div>
 		<div>
 			<strong>Torneo:</strong>
+			<a th:href="@{'/tornei/' + ${partita.torneoDiAppartenenza.id}}">
 			<span th:text="${partita.torneoDiAppartenenza.nome}"> Torneo </span>
+			</a>
 		</div>
 		<div>
 			<strong>Arbitro:</strong>
