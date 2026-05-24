@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Arbitri
+	</title>
+</head>
+
+<body>
+	<h1>Arbitri</h1>
+	<div th:if="${listaArbitri==null || listaArbitri.isEmpty()}">Non ci sono arbitri nel sistema</div>
+	<ul>
+		<li th:each="arbitro : ${listaArbitri}">
+			<a th:href="@{'/arbitri' + '/' + ${arbitro.id}}" th:text="${arbitro.nome} + ' ' + ${arbitro.cognome}">Nome e Cognome</a>
+		</li>
+	</ul>
+</body>
+
+</html>

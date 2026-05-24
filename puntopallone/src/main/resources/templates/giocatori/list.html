@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Giocatori</title>
+</head>
+
+<body>
+	<h1>Giocatori</h1>
+	<div th:if="${listaGiocatori == null || listaGiocatori.isEmpty()}">Non ci sono giocatori nel sistema</div>
+	<ul>
+		<li th:each="giocatore : ${listaGiocatori}">
+			<a th:href="@{'/giocatori/' + ${giocatore.id}}" th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}">Nome e Cognome</a>
+		</li>
+	</ul>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Arbitro
+	</title>
+</head>
+
+<body>
+	<h1>
+		Dettagli Arbitro
+	</h1>
+	<div th:if="${arbitro}">
+		<div>
+			<strong>Nome:</strong>
+			<span th:text="${arbitro.nome}"> Nome </span>
+		</div>
+		<div>
+			<strong>Cognome:</strong>
+			<span th:text="${arbitro.cognome}"> Cognome </span>
+		</div>
+		<div>
+			<strong>Codice arbitrale:</strong>
+			<span th:text="${arbitro.codiceArbitrale}"> Codice arbitrale </span>
+		</div>
+		<div>
+			<strong>Partite arbitrate:</strong>
+			<ul>
+				<li th:each="partita : ${arbitro.partiteDoveArbitra}">
+					<a th:href="@{'/partite/' + ${partita.id}}">
+						<span th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome}"> Squadra in casa vs Squadra in trasferta </span>
+						<span th:text="'(' + ${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy') + ')'}"> Data </span>
+					</a>
+				</li>
+			</ul>
+			<div th:if="${arbitro.partiteDoveArbitra.isEmpty()}">Nessuna partita arbitrata.</div>
+		</div>
+	</div>
+</body>
+
+</html>

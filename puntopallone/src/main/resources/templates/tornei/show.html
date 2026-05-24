@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Torneo
+	</title>
+</head>
+
+<body>
+	<h1>
+		Dettagli Torneo
+	</h1>
+	<div th:if="${torneo}">
+		<div>
+			<strong>Nome:</strong>
+			<span th:text="${torneo.nome}"> Nome </span>
+		</div>
+		<div>
+			<strong>Anno:</strong>
+			<span th:text="${torneo.anno}"> Anno </span>
+		</div>
+		<div>
+			<strong>Descrizione:</strong>
+			<span th:text="${torneo.descrizione != null ? torneo.descrizione : 'Nessuna descrizione'}"> Descrizione
+			</span>
+		</div>
+		<div>
+			<strong>Squadre partecipanti:</strong>
+			<ul>
+				<li th:each="squadra : ${torneo.squadrePartecipanti}">
+					<a th:href="@{'/squadre/' + ${squadra.id}}">
+						<span th:text="${squadra.nome}"> Nome </span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<strong>Partite:</strong>
+			<ul>
+				<li th:each="partita : ${torneo.partiteDelTorneo}">
+					<a th:href="@{'/partite/' + ${partita.id}}">
+						<span th:text="${partita.squadraInCasa.nome}+' vs '+ ${partita.squadraInTrasferta.nome}"> Nome
+						</span>
+						<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+')'}"> Data
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+</html>

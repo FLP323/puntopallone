@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Partita
+	</title>
+</head>
+
+<body>
+	<h1>
+		Dettagli Partita
+	</h1>
+	<div th:if="${partita}">
+		<div>
+			<strong>Nome:</strong>
+			<span th:text="${partita.squadraInCasa.nome}+' vs '+ ${partita.squadraInTrasferta.nome}"> Nome </span>
+		</div>
+		<div>
+			<strong>Data:</strong>
+			<span th:text="${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')}"> Data </span>
+		</div>
+		<div>
+			<strong>Orario:</strong>
+			<span th:text="${#temporals.format(partita.dataEOraInizioPartita, 'HH:mm')}"> Orario </span>
+		</div>
+		<div>
+			<strong>Luogo:</strong>
+			<span th:text="${partita.luogo}"> Luogo </span>
+		</div>
+		<div>
+			<strong>Torneo:</strong>
+			<span th:text="${partita.torneoDiAppartenenza.nome}"> Torneo </span>
+		</div>
+		<div>
+			<strong>Arbitro:</strong>
+			<a th:href="@{'/arbitri/' + ${partita.arbitroInCarica.id}}">
+			<span th:text="${partita.arbitroInCarica.nome}+' '+${partita.arbitroInCarica.cognome}+' ('+${partita.arbitroInCarica.codiceArbitrale}+')'">Nome Cognome (Codice Arbitrale)</span>
+			</a>
+		</div>
+		<div>
+			<strong>Risultato:</strong>
+			<span th:text="${partita.goalsHome != null and partita.goalsAway != null ? partita.goalsHome + ' - ' + partita.goalsAway : '? - ?'}"> Gol in casa - Gol in trasferta </span>
+		</div>
+	</div>
+</body>
+
+</html>

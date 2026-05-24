@@ -59,8 +59,10 @@ public class Partita {
 	private Torneo torneoDiAppartenenza;
 	
 	// Associazione con due squadre
+	@NotNull
 	@ManyToOne
 	private Squadra squadraInCasa;
+	@NotNull
 	@ManyToOne
 	private Squadra squadraInTrasferta;
 		

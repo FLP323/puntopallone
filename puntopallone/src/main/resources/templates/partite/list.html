@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Partite</title>
+</head>
+
+<body>
+	<h1>Partite</h1>
+	<div th:if="${listaPartite == null || listaPartite.isEmpty()}">Non ci sono partite nel sistema</div>
+	<ul>
+		<li th:each="partita : ${listaPartite}">
+			<a th:href="@{'/partite/' + ${partita.id}}">
+				<span th:text="${partita.squadraInCasa.nome}+' vs '+ ${partita.squadraInTrasferta.nome}"> Nome </span>
+				<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+')'}"> Data </span>
+			</a>
+		</li>
+	</ul>
+</body>
+
+</html>

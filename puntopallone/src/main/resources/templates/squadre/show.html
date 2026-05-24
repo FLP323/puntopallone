@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Squadra
+	</title>
+</head>
+
+<body>
+	<h1>
+		Dettagli Squadra
+	</h1>
+	<div>
+		<strong>Nome:</strong>
+		<span th:text="${squadra.nome}"> Nome </span>
+	</div>
+	<div>
+		<strong>Anno di fondazione:</strong>
+		<span th:text="${squadra.annoDiFondazione}"> Anno di fondazione </span>
+	</div>
+	<div>
+		<strong>Città:</strong>
+		<span th:text="${squadra.città}"> Città </span>
+	</div>
+	<div>
+		<strong>Tornei partecipati:</strong>
+		<ul>
+			<li th:each="torneo : ${squadra.torneiPartecipati}">
+				<a th:href="@{'/tornei/' + ${torneo.id}}" th:text="${torneo.nome} + ' ' + ${torneo.anno}">Nome
+					torneo</a>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<strong>Giocatori in rosa:</strong>
+		<ul>
+			<li th:each="giocatore : ${squadra.rosa}">
+				<a th:href="@{'/giocatori/' + ${giocatore.id}}"
+					th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}"> Giocatore in rosa</a>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<strong>Partite in casa:</strong>
+		<ul>
+			<li th:each="partita : ${squadra.partiteInCasa}">
+				<a th:href="@{'/partite/' + ${partita.id}}">
+					<span th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome}"> Squadra
+						in casa vs Squadra in trasferta </span>
+					<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+')'}"> Data
+					</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<strong>Partite in trasferta:</strong>
+		<ul>
+			<li th:each="partita : ${squadra.partiteInTrasferta}">
+				<a th:href="@{'/partite/' + ${partita.id}}">
+					<span th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome}"> Squadra
+						in casa vs Squadra in trasferta </span>
+					<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+')'}"> Data
+					</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</body>
+
+</html>

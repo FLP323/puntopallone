@@ -1,7 +1,7 @@
 package it.ur3.siw.model;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import it.ur3.siw.validation.NotFutureYear;
 import jakarta.persistence.Column;
@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -33,7 +32,7 @@ public class Squadra {
 	@Min(value = 1857, message = "La data di fondazione non può essere minore di 1857") // Data di nascita della prima squadra di calcio
 	@NotFutureYear
 	@Column(nullable = false)
-	private Integer dataDiFondazione;
+	private Integer annoDiFondazione;
 	
 	@NotBlank
 	@Column(nullable = false)
@@ -41,19 +40,19 @@ public class Squadra {
 	
 	/* ASSOCIAZIONI */
 	
-	// Associazione con uno o più tornei
+	// Associazione con zero o più tornei
 	@ManyToMany(mappedBy = "squadrePartecipanti")
-	private List<Torneo> torneiPartecipati;
+	private Set<Torneo> torneiPartecipati;
 	
-	// Associzione con uno o più giocatori
+	// Associzione con zero o più giocatori
 	@OneToMany(mappedBy = "squadraDiAppartenenza")
-	private List<Giocatore> rosa;
+	private Set<Giocatore> rosa;
 	
-	// Associazione con una o più partite
-	@OneToMany(mappedBy = "")
-	private List<Partita> partiteInCasa;
-	@OneToMany(mappedBy = "")
-	private List<Partita> partiteInTrasferta;
+	// Associazione con zero o più partite
+	@OneToMany(mappedBy = "squadraInCasa")
+	private Set<Partita> partiteInCasa;
+	@OneToMany(mappedBy = "squadraInTrasferta")
+	private Set<Partita> partiteInTrasferta;
 	
 	/* GETTERS E SETTERS */
 	
@@ -69,12 +68,12 @@ public class Squadra {
 		this.nome = nome;
 	}
 
-	public Integer getDataDiFondazione() {
-		return dataDiFondazione;
+	public Integer getAnnoDiFondazione() {
+		return annoDiFondazione;
 	}
 
-	public void setDataDiFondazione(Integer dataDiFondazione) {
-		this.dataDiFondazione = dataDiFondazione;
+	public void setAnnoDiFondazione(Integer annoDiFondazione) {
+		this.annoDiFondazione = annoDiFondazione;
 	}
 
 	public String getCittà() {
@@ -85,35 +84,35 @@ public class Squadra {
 		this.città = città;
 	}
 
-	public List<Torneo> getTorneiPartecipati() {
+	public Set<Torneo> getTorneiPartecipati() {
 		return torneiPartecipati;
 	}
 
-	public void setTorneiPartecipati(List<Torneo> torneiPartecipati) {
+	public void setTorneiPartecipati(Set<Torneo> torneiPartecipati) {
 		this.torneiPartecipati = torneiPartecipati;
 	}
 
-	public List<Giocatore> getRosa() {
+	public Set<Giocatore> getRosa() {
 		return rosa;
 	}
 
-	public void setRosa(List<Giocatore> rosa) {
+	public void setRosa(Set<Giocatore> rosa) {
 		this.rosa = rosa;
 	}
 
-	public List<Partita> getPartiteInCasa() {
+	public Set<Partita> getPartiteInCasa() {
 		return partiteInCasa;
 	}
 
-	public void setPartiteInCasa(List<Partita> partiteInCasa) {
+	public void setPartiteInCasa(Set<Partita> partiteInCasa) {
 		this.partiteInCasa = partiteInCasa;
 	}
 
-	public List<Partita> getPartiteInTrasferta() {
+	public Set<Partita> getPartiteInTrasferta() {
 		return partiteInTrasferta;
 	}
 
-	public void setPartiteInTrasferta(List<Partita> partiteInTrasferta) {
+	public void setPartiteInTrasferta(Set<Partita> partiteInTrasferta) {
 		this.partiteInTrasferta = partiteInTrasferta;
 	}
 

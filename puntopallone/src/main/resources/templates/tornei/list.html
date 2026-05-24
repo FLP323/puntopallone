@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Tornei</title>
+</head>
+
+<body>
+	<h1>Tornei</h1>
+	<div th:if="${listaTornei == null || listaTornei.isEmpty()}">Non ci sono tornei nel sistema</div>
+	<ul>
+		<li th:each="torneo : ${listaTornei}">
+			<a th:href="@{'/tornei/' + ${torneo.id}}" th:text="${torneo.nome} + ' ' + ${torneo.anno}">Nome torneo</a>
+		</li>
+	</ul>
+</body>
+
+</html>

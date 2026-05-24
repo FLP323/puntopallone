@@ -1,7 +1,7 @@
 package it.ur3.siw.model;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import it.ur3.siw.validation.NotFutureYear;
 import jakarta.persistence.Column;
@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -39,13 +38,13 @@ public class Torneo {
 
 	/* ASSOCIAZIONI */
 	
-	// Associazione con una o più squadre
+	// Associazione con zero o più squadre
 	@ManyToMany
-	private List<Squadra> squadrePartecipanti;
+	private Set<Squadra> squadrePartecipanti;
 	
-	// Associazione con una o più partite
+	// Associazione con zero o più partite
 	@OneToMany(mappedBy = "torneoDiAppartenenza")
-	private List<Partita> partiteDelTorneo;
+	private Set<Partita> partiteDelTorneo;
 	
 	/* GETTERS E SETTERS */
 	
@@ -77,19 +76,19 @@ public class Torneo {
 		this.descrizione = descrizione;
 	}
 
-	public List<Squadra> getSquadrePartecipanti() {
+	public Set<Squadra> getSquadrePartecipanti() {
 		return squadrePartecipanti;
 	}
 
-	public void setSquadrePartecipanti(List<Squadra> squadrePartecipanti) {
+	public void setSquadrePartecipanti(Set<Squadra> squadrePartecipanti) {
 		this.squadrePartecipanti = squadrePartecipanti;
 	}
 
-	public List<Partita> getPartiteDelTorneo() {
+	public Set<Partita> getPartiteDelTorneo() {
 		return partiteDelTorneo;
 	}
 
-	public void setPartiteDelTorneo(List<Partita> partiteDelTorneo) {
+	public void setPartiteDelTorneo(Set<Partita> partiteDelTorneo) {
 		this.partiteDelTorneo = partiteDelTorneo;
 	}
 	

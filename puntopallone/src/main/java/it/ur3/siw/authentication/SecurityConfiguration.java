@@ -1,5 +1,5 @@
 package it.ur3.siw.authentication;
-
+/*
 import it.ur3.siw.model.enums.UserRole;
 
 import javax.sql.DataSource;
@@ -43,13 +43,23 @@ public class SecurityConfiguration {
     @Bean
     protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.authorizeHttpRequests(authorize -> {
-            authorize.requestMatchers(HttpMethod.GET, "/").permitAll();
-            authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
-            authorize.requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
-            authorize.requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
-            authorize.anyRequest().authenticated();
-        });
+    	httpSecurity.authorizeHttpRequests(authorize -> {
+			// Risorse statiche sempre pubbliche
+			authorize.requestMatchers(HttpMethod.GET, "/", "/homepage", "/register", "/login", "/css/**", "/images/**").permitAll();
+			authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
+			// [SOLO ADMIN] funzionalità dell'amministratore (GET e POST)
+			authorize.requestMatchers(HttpMethod.GET, "/???/new").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
+			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
+			// [ALMENO USER] funzionalità dell'utente registrato (GET e POST)
+			authorize.requestMatchers(HttpMethod.GET, "/???/new").hasAnyAuthority(UserRole.ROLE_USER.getRole());
+			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_USER.getRole());
+			// [TUTTI] funzionalità dell'utente qualsiasi (GET)
+			authorize.requestMatchers(HttpMethod.GET, "/arbitri", "/arbitri/**").permitAll();
+			// Sezione admin generica
+			authorize.requestMatchers("/admin/**").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
+			// Tutto il resto richiede autenticazione
+			authorize.anyRequest().authenticated();
+		});
 
         httpSecurity.formLogin(form -> {
             form.loginPage("/login").permitAll();
@@ -69,3 +79,4 @@ public class SecurityConfiguration {
         return httpSecurity.build();
     }
 }
+*/

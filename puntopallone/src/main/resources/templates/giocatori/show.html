@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+		Giocatore
+	</title>
+</head>
+
+<body>
+	<h1>
+		Dettagli Giocatore
+	</h1>
+	<div th:if="${giocatore}">
+		<div>
+			<strong>Nome:</strong>
+			<span th:text="${giocatore.nome}"> Nome </span>
+		</div>
+		<div>
+			<strong>Cognome:</strong>
+			<span th:text="${giocatore.cognome}"> Cognome </span>
+		</div>
+		<div>
+			<strong>Data di nascita:</strong>
+			<span th:text="${#temporals.format(giocatore.dataDiNascita, 'dd/MM/yyyy')}"> Data di nascita </span>
+		</div>
+		<div>
+			<strong>Ruolo:</strong>
+			<span th:text="${giocatore.ruolo.getDescription() + ' (' + giocatore.ruolo.getCode()} + ')'"> Ruolo
+				(Abbreviazione)</span>
+		</div>
+		<div>
+			<strong>Altezza:</strong>
+			<span th:text="${giocatore.altezza + ' cm'}"> Altezza cm </span>
+		</div>
+		<div>
+			<strong>Squadra:</strong>
+			<a th:href="@{'/squadre/' + ${giocatore.squadraDiAppartenenza.id}}">
+				<span th:text="${giocatore.squadraDiAppartenenza.nome}"> Squadra </span>
+			</a>
+		</div>
+	</div>
+</body>
+
+</html>

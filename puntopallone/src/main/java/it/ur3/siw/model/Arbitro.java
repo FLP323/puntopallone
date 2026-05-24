@@ -34,8 +34,8 @@ public class Arbitro {
 	
 	/* ASSOCIAZIONI */
 	
-	// Associazione con una o più partite
-	@OneToMany(mappedBy = "")
+	// Associazione con zero o più partite
+	@OneToMany(mappedBy = "arbitroInCarica")
 	private List<Partita> partiteDoveArbitra;
 	
 	/* GETTERS E SETTERS */

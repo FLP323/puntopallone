@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Squadre</title>
+</head>
+
+<body>
+	<h1>Squadre</h1>
+	<div th:if="${listaSquadre == null || listaSquadre.isEmpty()}">Non ci sono squadre nel sistema</div>
+	<ul>
+		<li th:each="squadra : ${listaSquadre}">
+			<a th:href="@{'/squadre/' + ${squadra.id}}" th:text="${squadra.nome}">Nome squadra</a>
+		</li>
+	</ul>
+</body>
+
+</html>
