@@ -31,6 +31,7 @@
 					torneo</a>
 			</li>
 		</ul>
+		<ul th:if="${squadra.torneiPartecipati.isEmpty()}"> Nessun torneo partecipato </ul>
 	</div>
 	<div>
 		<strong>Giocatori in rosa:</strong>
@@ -40,6 +41,7 @@
 					th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}"> Giocatore in rosa</a>
 			</li>
 		</ul>
+		<ul th:if="${squadra.rosa.isEmpty()}"> Nessun giocatore in rosa </ul>
 	</div>
 	<div>
 		<strong>Partite in casa:</strong>
@@ -48,11 +50,13 @@
 				<a th:href="@{'/partite/' + ${partita.id}}">
 					<span th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome}"> Squadra
 						in casa vs Squadra in trasferta </span>
-					<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+')'}"> Data
+					<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+') '}"> Data
 					</span>
+					<span th:text="${'[' + partita.stato.getStato() + ']'}"> Stato </span>
 				</a>
 			</li>
 		</ul>
+		<ul th:if="${squadra.partiteInCasa.isEmpty()}"> Nessuna partita in casa </ul>
 	</div>
 	<div>
 		<strong>Partite in trasferta:</strong>
@@ -63,9 +67,11 @@
 						in casa vs Squadra in trasferta </span>
 					<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+')'}"> Data
 					</span>
+					<span th:text="${'[' + partita.stato.getStato() + ']'}"> Stato </span>
 				</a>
 			</li>
 		</ul>
+		<ul th:if="${squadra.partiteInTrasferta.isEmpty()}"> Nessuna partita in trasferta </ul>
 	</div>
 </body>
 

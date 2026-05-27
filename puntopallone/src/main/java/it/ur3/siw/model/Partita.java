@@ -3,7 +3,6 @@ package it.ur3.siw.model;
 import java.time.Instant;
 import java.util.Objects;
 
-import it.ur3.siw.model.enums.PlayerRole;
 import it.ur3.siw.model.enums.Stato;
 import it.ur3.siw.validation.ValidGoals;
 import it.ur3.siw.validation.ValidMatchDate;

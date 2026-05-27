@@ -8,17 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.ur3.siw.model.Arbitro;
 import it.ur3.siw.repository.ArbitroRepository;
-import it.ur3.siw.repository.PartitaRepository;
 
 @Service
 public class ArbitroService {
 
 	private final ArbitroRepository arbitroRepository;
-	private final PartitaRepository partitaRepository;
 
-	public ArbitroService(ArbitroRepository arbitroRepository, PartitaRepository partitaRepository) {
+	public ArbitroService(ArbitroRepository arbitroRepository) {
 		this.arbitroRepository = arbitroRepository;
-		this.partitaRepository = partitaRepository;
 	}
 
 	@Transactional(readOnly = true)

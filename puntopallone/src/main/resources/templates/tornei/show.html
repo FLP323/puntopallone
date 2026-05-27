@@ -34,19 +34,42 @@
 					</a>
 				</li>
 			</ul>
+			<ul th:if="${torneo.squadrePartecipanti.isEmpty()}"> Nessuna squadra partecipa a questo torneo</ul>
 		</div>
 		<div>
-			<strong>Partite:</strong>
-			<ul>
-				<li th:each="partita : ${torneo.partiteDelTorneo}">
-					<a th:href="@{'/partite/' + ${partita.id}}">
-						<span th:text="${partita.squadraInCasa.nome}+' vs '+ ${partita.squadraInTrasferta.nome}"> Nome
-						</span>
-						<span th:text="' ('+${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')+')'}"> Data
-						</span>
-					</a>
-				</li>
-			</ul>
+			<strong>Partite programmate:</strong>
+			<th:block
+				th:with="partiteProgrammate=${torneo.partiteDelTorneo.?[stato == T(it.ur3.siw.model.enums.Stato).SCHEDULED]}">
+				<ul th:if="${!partiteProgrammate.isEmpty()}">
+					<li th:each="partita : ${partiteProgrammate}">
+						<a th:href="@{'/partite/' + ${partita.id}}">
+							<span
+								th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome} + ' (' + ${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')} + ')'">
+								Nome (Data)
+							</span>
+						</a>
+					</li>
+				</ul>
+				<ul th:if="${partiteProgrammate.isEmpty()}">Nessuna partita programmata</ul>
+			</th:block>
+		</div>
+
+		<div>
+			<strong>Partite già giocate:</strong>
+			<th:block
+				th:with="partiteGiocate=${torneo.partiteDelTorneo.?[stato == T(it.ur3.siw.model.enums.Stato).PLAYED]}">
+				<ul th:if="${!partiteGiocate.isEmpty()}">
+					<li th:each="partita : ${partiteGiocate}">
+						<a th:href="@{'/partite/' + ${partita.id}}">
+							<span
+								th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome} + ' (' + ${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy')} + ')'">
+								Nome (Data)
+							</span>
+						</a>
+					</li>
+				</ul>
+				<ul th:if="${partiteGiocate.isEmpty()}">Nessuna partita già giocata</ul>
+			</th:block>
 		</div>
 	</div>
 </body>
