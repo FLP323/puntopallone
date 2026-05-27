@@ -71,6 +71,40 @@
 				<ul th:if="${partiteGiocate.isEmpty()}">Nessuna partita già giocata</ul>
 			</th:block>
 		</div>
+		<div>
+			<strong>Classifica:</strong>
+			<table th:if="${!classifica.isEmpty()}">
+				<thead>
+					<tr>
+						<th>Pos.</th>
+						<th>Squadra</th>
+						<th>PT</th>
+						<th>PG</th>
+						<th>V</th>
+						<th>P</th>
+						<th>S</th>
+						<th>DR</th>
+						<th>GF:GS</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="entry, iterStat : ${classifica}">
+						<td th:text="${iterStat.index + 1}">1</td>
+						<td>
+							<a th:href="@{'/squadre/' + ${entry.squadra.id}}" th:text="${entry.squadra.nome}">Nome</a>
+						</td>
+						<td th:text="${entry.punti}">0</td>
+						<td th:text="${entry.partiteGiocate}">0</td>
+						<td th:text="${entry.vinte}">0</td>
+						<td th:text="${entry.pareggiate}">0</td>
+						<td th:text="${entry.perse}">0</td>
+						<td th:text="${entry.differenzaReti}">0</td>
+						<td th:text="${entry.golFatti} + ':' + ${entry.golSubiti}">0:0</td>
+					</tr>
+				</tbody>
+			</table>
+			<ul th:if="${classifica.isEmpty()}">Nessuna squadra partecipante o nessuna partita giocata.</ul>
+		</div>
 	</div>
 </body>
 

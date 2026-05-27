@@ -32,6 +32,7 @@ public class TorneoController {
             return "redirect:/tornei";
         }
         model.addAttribute("torneo", optional.get());
+        model.addAttribute("classifica", torneoService.calcolaClassifica(id));
         return "tornei/show";
     }
 }

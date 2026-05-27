@@ -15,5 +15,8 @@ public interface TorneoRepository extends JpaRepository<Torneo, Long>{
 			+ "LEFT JOIN FETCH t.partiteDelTorneo "
 			+ "WHERE t.id = :id")
 	Optional<Torneo> findByIdWithAssociazioni(@Param("id") Long id);
+	
+	@Query("SELECT t FROM Torneo t LEFT JOIN FETCH t.partiteDelTorneo LEFT JOIN FETCH t.squadrePartecipanti WHERE t.id = :id")
+	Optional<Torneo> findByIdWithPartite(@Param("id") Long id);
 
 }
