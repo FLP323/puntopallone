@@ -47,7 +47,7 @@ public class Partita {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 11)
+	@Column(nullable = false, length = 9)
 	private Stato stato;
 	
 	/* ASSOCIAZIONI */

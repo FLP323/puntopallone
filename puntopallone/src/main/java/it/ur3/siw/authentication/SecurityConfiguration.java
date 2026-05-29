@@ -1,5 +1,5 @@
 package it.ur3.siw.authentication;
-/*
+
 import it.ur3.siw.model.enums.UserRole;
 
 import javax.sql.DataSource;
@@ -29,9 +29,9 @@ public class SecurityConfiguration {
     public UserDetailsService userDetailsService() {
         JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
         manager.setUsersByUsernameQuery(
-            "SELECT username, password, 1 as enabled FROM credentials WHERE username=?");
+            "SELECT username, password, 1 as enabled FROM utente WHERE username=?");
         manager.setAuthoritiesByUsernameQuery(
-            "SELECT username, role FROM credentials WHERE username=?");
+            "SELECT username, role FROM utente WHERE username=?");
         return manager;
     }
 
@@ -47,14 +47,20 @@ public class SecurityConfiguration {
 			// Risorse statiche sempre pubbliche
 			authorize.requestMatchers(HttpMethod.GET, "/", "/homepage", "/register", "/login", "/css/**", "/images/**").permitAll();
 			authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
-			// [SOLO ADMIN] funzionalità dell'amministratore (GET e POST)
+			/*// [SOLO ADMIN] funzionalità dell'amministratore (GET e POST)
 			authorize.requestMatchers(HttpMethod.GET, "/???/new").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
 			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
 			// [ALMENO USER] funzionalità dell'utente registrato (GET e POST)
 			authorize.requestMatchers(HttpMethod.GET, "/???/new").hasAnyAuthority(UserRole.ROLE_USER.getRole());
-			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_USER.getRole());
+			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_USER.getRole());*/
 			// [TUTTI] funzionalità dell'utente qualsiasi (GET)
-			authorize.requestMatchers(HttpMethod.GET, "/arbitri", "/arbitri/**").permitAll();
+			authorize.requestMatchers(HttpMethod.GET, "/arbitri", "/arbitri/**"
+													, "/giocatori", "/giocatori/**"
+													, "/partite", "/partite/**"
+													, "/squadre", "/squadre/**"
+													, "/tornei", "/tornei/**").permitAll();
+			// Sezione utente registrato generica
+			authorize.requestMatchers("/utente/**").hasAnyAuthority(UserRole.ROLE_USER.getRole(), UserRole.ROLE_ADMIN.getRole());
 			// Sezione admin generica
 			authorize.requestMatchers("/admin/**").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
 			// Tutto il resto richiede autenticazione
@@ -79,4 +85,3 @@ public class SecurityConfiguration {
         return httpSecurity.build();
     }
 }
-*/

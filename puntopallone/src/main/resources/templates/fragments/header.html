@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	
+</head>
+
+<body>
+	<header th:fragment="header">
+		<div th:if="${userDetails}">
+			<span th:text="${userDetails.username}"></span>
+			<form th:action="@{/logout}" method="POST" style="display:inline;">
+				<button type="submit">Logout</button>
+			</form>
+		</div>
+		<div th:unless="${userDetails}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+</body>
+
+</html>

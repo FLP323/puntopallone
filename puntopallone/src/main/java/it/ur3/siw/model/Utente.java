@@ -25,12 +25,12 @@ public class Utente {
 	private String username;
     
 	@NotBlank
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private String password;
     
-	@NotNull
+	//@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 7)
+	@Column(nullable = false, length = 9)
 	private UserRole role;
 	
 	/* ASSOCIAZIONI */

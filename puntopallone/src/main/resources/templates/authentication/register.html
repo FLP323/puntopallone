@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrazione - Puntopallone</title>
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <h1>Registrazione nuovo utente</h1>
+
+    <form th:action="@{/register}" th:object="${utente}" method="POST">
+		<!-- Token CSRF -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" th:field="*{username}" required />
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red"></span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" th:field="*{password}" required />
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></span>
+        </div>
+        <div>
+            <button type="submit">Registrati</button>
+        </div>
+    </form>
+
+    <p>Hai già un account? <a th:href="@{/login}">Accedi</a></p>
+</body>
+</html>
