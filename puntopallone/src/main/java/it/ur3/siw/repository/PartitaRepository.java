@@ -15,6 +15,8 @@ public interface PartitaRepository extends JpaRepository<Partita, Long>{
 	           "LEFT JOIN FETCH p.squadraInTrasferta " +
 	           "LEFT JOIN FETCH p.torneoDiAppartenenza " +
 	           "LEFT JOIN FETCH p.arbitroInCarica " +
+	           "LEFT JOIN FETCH p.commentiDegliUtenti c " +
+	           "LEFT JOIN FETCH c.commentatore " +
 	           "WHERE p.id = :id")
 	    Optional<Partita> findByIdWithAssociazioni(@Param("id") Long id);
 

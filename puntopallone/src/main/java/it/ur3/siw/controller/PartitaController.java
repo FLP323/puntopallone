@@ -1,5 +1,6 @@
 package it.ur3.siw.controller;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,13 @@ public class PartitaController {
     }
     
     @GetMapping("/partite/{id}")
-    public String show(@PathVariable Long id, Model model) {
-        Optional<Partita> optional = partitaService.findById(id);
+    public String show(@PathVariable Long id, Model model, Principal principal) {
+        Optional<Partita> optional;
+        if (principal != null) {
+            optional = partitaService.findByIdWithAssociazioni(id);
+        } else {
+            optional = partitaService.findById(id);
+        }
         if (optional.isEmpty()) {
             return "redirect:/partite";
         }

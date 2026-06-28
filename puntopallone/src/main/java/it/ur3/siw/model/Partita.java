@@ -1,6 +1,7 @@
 package it.ur3.siw.model;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 import it.ur3.siw.model.enums.Stato;
@@ -15,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -69,9 +71,13 @@ public class Partita {
 	@NotNull
 	@ManyToOne
 	private Arbitro arbitroInCarica;
+	
+	//Associazione con uno o più commenti
+	@OneToMany(mappedBy = "partitaCommentata")
+	private List<Commento> commentiDegliUtenti;
 
 	/* GETTERS E SETTERS */
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -146,6 +152,14 @@ public class Partita {
 
 	public void setArbitroInCarica(Arbitro arbitroInCarica) {
 		this.arbitroInCarica = arbitroInCarica;
+	}
+	
+	public List<Commento> getCommentiDegliUtenti() {
+		return commentiDegliUtenti;
+	}
+
+	public void setCommentiDegliUtenti(List<Commento> commentiDegliUtenti) {
+		this.commentiDegliUtenti = commentiDegliUtenti;
 	}
 	
 	/* EQUALS E HASHCODE */

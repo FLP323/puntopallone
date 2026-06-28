@@ -49,10 +49,10 @@ public class SecurityConfiguration {
 			authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
 			/*// [SOLO ADMIN] funzionalità dell'amministratore (GET e POST)
 			authorize.requestMatchers(HttpMethod.GET, "/???/new").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
-			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
+			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());*/
 			// [ALMENO USER] funzionalità dell'utente registrato (GET e POST)
-			authorize.requestMatchers(HttpMethod.GET, "/???/new").hasAnyAuthority(UserRole.ROLE_USER.getRole());
-			authorize.requestMatchers(HttpMethod.POST, "/???").hasAnyAuthority(UserRole.ROLE_USER.getRole());*/
+			authorize.requestMatchers(HttpMethod.GET, "/partite/*/commento", "/commento/*/edit").hasAnyAuthority(UserRole.ROLE_USER.name(), UserRole.ROLE_ADMIN.name());
+			authorize.requestMatchers(HttpMethod.POST, "/partite/*/commento", "/commento/*/edit").hasAnyAuthority(UserRole.ROLE_USER.name(), UserRole.ROLE_ADMIN.name());
 			// [TUTTI] funzionalità dell'utente qualsiasi (GET)
 			authorize.requestMatchers(HttpMethod.GET, "/arbitri", "/arbitri/**"
 													, "/giocatori", "/giocatori/**"
@@ -60,9 +60,9 @@ public class SecurityConfiguration {
 													, "/squadre", "/squadre/**"
 													, "/tornei", "/tornei/**").permitAll();
 			// Sezione utente registrato generica
-			authorize.requestMatchers("/utente/**").hasAnyAuthority(UserRole.ROLE_USER.getRole(), UserRole.ROLE_ADMIN.getRole());
+			authorize.requestMatchers("/utente/**").hasAnyAuthority(UserRole.ROLE_USER.name(), UserRole.ROLE_ADMIN.name());
 			// Sezione admin generica
-			authorize.requestMatchers("/admin/**").hasAnyAuthority(UserRole.ROLE_ADMIN.getRole());
+			authorize.requestMatchers("/admin/**").hasAnyAuthority(UserRole.ROLE_ADMIN.name());
 			// Tutto il resto richiede autenticazione
 			authorize.anyRequest().authenticated();
 		});

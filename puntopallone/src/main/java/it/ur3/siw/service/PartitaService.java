@@ -25,6 +25,11 @@ public class PartitaService {
 
 	@Transactional(readOnly = true)
 	public Optional<Partita> findById(Long id) {
+		return partitaRepository.findById(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public Optional<Partita> findByIdWithAssociazioni(Long id) {
 		return partitaRepository.findByIdWithAssociazioni(id);
 	}
 }

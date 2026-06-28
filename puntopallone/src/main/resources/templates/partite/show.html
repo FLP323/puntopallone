@@ -45,6 +45,49 @@
 			<span th:text="${partita.goalsHome != null and partita.goalsAway != null ? partita.goalsHome + ' - ' + partita.goalsAway : '? - ?'}"> Gol in casa - Gol in trasferta </span>
 		</div>
 	</div>
+	<!-- Sezione commenti -->
+	<div>
+	    <h3>Commenti</h3>
+
+	    <!-- Mostra commenti e form solo a utenti autenticati -->
+	    <th:block th:if="${userDetails != null}">
+
+	        <!-- Elenco commenti -->
+	        <div th:if="${!partita.commentiDegliUtenti.isEmpty()}">
+	            <div th:each="commento : ${partita.commentiDegliUtenti}">
+	                <div style="border-bottom:1px solid #ccc; padding:10px;">
+	                    <p>
+	                        <strong th:text="${commento.commentatore.username}"></strong>
+	                        <small th:text="${#temporals.format(commento.dataDelCommento, 'dd/MM/yyyy HH:mm')}"></small>
+	                    </p>
+	                    <p th:text="${commento.corpo}"></p>
+	                    <!-- Link per modifica, visibile solo se il commento è dell'utente corrente -->
+	                    <th:block th:if="${userDetails.username == commento.commentatore.username}">
+	                        <a th:href="@{'/commento/' + ${commento.id} + '/edit'}">Modifica</a>
+	                    </th:block>
+	                </div>
+	            </div>
+	        </div>
+	        <div th:if="${partita.commentiDegliUtenti.isEmpty()}">
+	            <p>Ancora nessun commento. Sii il primo!</p>
+	        </div>
+
+	        <!-- Form nuovo commento -->
+	        <form th:action="@{'/partite/' + ${partita.id} + '/commento'}" method="POST">
+	            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	            <textarea name="corpo" rows="3" required placeholder="Scrivi un commento..."></textarea>
+	            <button type="submit">Invia commento</button>
+	        </form>
+	    </th:block>
+
+	    <!-- Caso utente non autenticato -->
+	    <th:block th:unless="${userDetails != null}">
+	        <p>
+	            Per visualizzare e scrivere commenti,
+	            <a th:href="@{/login}">accedi</a> o <a th:href="@{/register}">registrati</a>.
+	        </p>
+	    </th:block>
+	</div>
 </body>
 
 </html>
