@@ -48,8 +48,6 @@ public class SquadraService {
 		return squadraRepository.findById(id);
 	}
 
-	// In SquadraService.java
-
 	@Transactional
 	public Squadra save(Squadra squadra) {
 		return squadraRepository.save(squadra);

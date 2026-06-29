@@ -10,12 +10,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@NamedEntityGraph(
+	    name = "Squadra.completo",
+	    attributeNodes = {
+	        @NamedAttributeNode("torneiPartecipati"),
+	        @NamedAttributeNode("rosa"),
+	        @NamedAttributeNode("partiteInCasa"),
+	        @NamedAttributeNode("partiteInTrasferta")
+	    }
+	)
 public class Squadra {
 	
 	/* ATTRIBUTI */
