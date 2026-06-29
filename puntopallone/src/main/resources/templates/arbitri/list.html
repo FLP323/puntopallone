@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>Arbitri</h1>
 	<div th:if="${listaArbitri==null || listaArbitri.isEmpty()}">Non ci sono arbitri nel sistema</div>
 	<ul>
@@ -15,6 +16,7 @@
 			<a th:href="@{'/arbitri' + '/' + ${arbitro.id}}" th:text="${arbitro.nome} + ' ' + ${arbitro.cognome}">Nome e Cognome</a>
 		</li>
 	</ul>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

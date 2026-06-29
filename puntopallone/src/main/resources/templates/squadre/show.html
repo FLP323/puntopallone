@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>
 		Dettagli Squadra
 	</h1>
@@ -73,6 +74,7 @@
 		</ul>
 		<ul th:if="${squadra.partiteInTrasferta.isEmpty()}"> Nessuna partita in trasferta </ul>
 	</div>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

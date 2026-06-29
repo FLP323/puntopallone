@@ -32,4 +32,16 @@ public class PartitaService {
 	public Optional<Partita> findByIdWithAssociazioni(Long id) {
 		return partitaRepository.findByIdWithAssociazioni(id);
 	}
+
+	@Transactional
+	public Partita save(Partita partita) {
+		return partitaRepository.save(partita);
+	}
+
+	@Transactional
+	public void delete(Long id) {
+		Partita partita = partitaRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Partita non trovata"));
+		partitaRepository.delete(partita);
+	}
 }

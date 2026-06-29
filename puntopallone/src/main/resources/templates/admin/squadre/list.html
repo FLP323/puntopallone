@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Gestione Squadre</title></head>
+<body>
+    <h1>Amministrazione Squadre</h1>
+    <div th:if="${squadre.isEmpty()}">Nessuna squadra presente.</div>
+    <ul>
+        <li th:each="squadra : ${squadre}">
+            <strong th:text="${squadra.nome}"></strong>
+            <a th:href="@{'/admin/squadre/' + ${squadra.id} + '/edit'}">Modifica</a>
+            <a th:href="@{'/admin/squadre/' + ${squadra.id} + '/delete'}">Elimina</a>
+        </li>
+    </ul>
+    <a th:href="@{/admin/squadre/new}">Nuova Squadra</a>
+	<div th:replace="~{fragments/footer :: adminfooter}"></div>
+</body>
+</html>

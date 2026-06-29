@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title th:text="${partita.id == null ? 'Nuova Partita' : 'Modifica Partita'}"></title>
+</head>
+<body>
+    <h1 th:text="${partita.id == null ? 'Crea Partita' : 'Modifica Partita'}"></h1>
+    <form th:action="@{${partita.id == null ? '/admin/partite' : '/admin/partite/' + partita.id + '/edit'}}" 
+          th:object="${partita}" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <!-- Data e ora -->
+        <div>
+            <label for="dataOra">Data e ora:</label>
+            <input type="datetime-local" id="dataOra" name="dataEOraInizioPartita" 
+                   th:value="${partita.id == null ? '' : dataOraFormattata}" required step="1" />
+            <span th:if="${#fields.hasErrors('dataEOraInizioPartita')}" th:errors="*{dataEOraInizioPartita}" style="color:red"></span>
+        </div>
+
+        <!-- Luogo -->
+        <div>
+            <label for="luogo">Luogo:</label>
+            <input type="text" id="luogo" th:field="*{luogo}" required />
+            <span th:if="${#fields.hasErrors('luogo')}" th:errors="*{luogo}" style="color:red"></span>
+        </div>
+
+        <!-- Torneo -->
+        <div>
+            <label for="torneoId">Torneo:</label>
+            <select id="torneoId" name="torneoId" required>
+                <option value="">Seleziona...</option>
+                <option th:each="torneo : ${tornei}"
+                        th:value="${torneo.id}"
+                        th:text="${torneo.nome} + ' (' + ${torneo.anno} + ')'"
+                        th:selected="${partita.torneoDiAppartenenza != null and partita.torneoDiAppartenenza.id == torneo.id}"></option>
+            </select>
+        </div>
+
+        <!-- Squadra in casa -->
+        <div>
+            <label for="squadraCasaId">Squadra in casa:</label>
+            <select id="squadraCasaId" name="squadraCasaId" required>
+                <option value="">Seleziona...</option>
+                <option th:each="squadra : ${squadre}"
+                        th:value="${squadra.id}"
+                        th:text="${squadra.nome}"
+                        th:selected="${partita.squadraInCasa != null and partita.squadraInCasa.id == squadra.id}"></option>
+            </select>
+        </div>
+
+        <!-- Squadra in trasferta -->
+        <div>
+            <label for="squadraOspiteId">Squadra in trasferta:</label>
+            <select id="squadraOspiteId" name="squadraOspiteId" required>
+                <option value="">Seleziona...</option>
+                <option th:each="squadra : ${squadre}"
+                        th:value="${squadra.id}"
+                        th:text="${squadra.nome}"
+                        th:selected="${partita.squadraInTrasferta != null and partita.squadraInTrasferta.id == squadra.id}"></option>
+            </select>
+        </div>
+
+        <!-- Arbitro -->
+        <div>
+            <label for="arbitroId">Arbitro:</label>
+            <select id="arbitroId" name="arbitroId" required>
+                <option value="">Seleziona...</option>
+                <option th:each="arbitro : ${arbitri}"
+                        th:value="${arbitro.id}"
+                        th:text="${arbitro.nome} + ' ' + ${arbitro.cognome}"
+                        th:selected="${partita.arbitroInCarica != null and partita.arbitroInCarica.id == arbitro.id}"></option>
+            </select>
+        </div>
+
+        <!-- Stato -->
+        <div>
+            <label for="stato">Stato:</label>
+            <select id="stato" th:field="*{stato}">
+                <option value="">Seleziona...</option>
+                <option th:each="stato : ${T(it.ur3.siw.model.enums.Stato).values()}"
+                        th:value="${stato.name()}"
+                        th:text="${stato.getStato()}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('stato')}" th:errors="*{stato}" style="color:red"></span>
+        </div>
+
+        <!-- Gol -->
+        <div>
+            <label for="goalsHome">Gol in casa:</label>
+            <input type="number" id="goalsHome" th:field="*{goalsHome}" min="0" />
+        </div>
+        <div>
+            <label for="goalsAway">Gol in trasferta:</label>
+            <input type="number" id="goalsAway" th:field="*{goalsAway}" min="0" />
+        </div>
+
+        <button type="submit">Salva</button>
+    </form>
+	<div th:replace="~{fragments/footer :: adminfooter}"></div>
+</body>
+</html>

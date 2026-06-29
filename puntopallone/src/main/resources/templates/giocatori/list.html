@@ -6,6 +6,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>Giocatori</h1>
 	<div th:if="${listaGiocatori == null || listaGiocatori.isEmpty()}">Non ci sono giocatori nel sistema</div>
 	<ul>
@@ -13,6 +14,7 @@
 			<a th:href="@{'/giocatori/' + ${giocatore.id}}" th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}">Nome e Cognome</a>
 		</li>
 	</ul>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

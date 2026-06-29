@@ -6,6 +6,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>Partite</h1>
 	<div th:if="${listaPartite == null || listaPartite.isEmpty()}">Non ci sono partite nel sistema</div>
 	<ul>
@@ -16,6 +17,7 @@
 			</a>
 		</li>
 	</ul>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

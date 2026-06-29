@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>
 		Dettagli Giocatore
 	</h1>
@@ -34,12 +35,16 @@
 			<span th:text="${giocatore.altezza + ' cm'}"> Altezza cm </span>
 		</div>
 		<div>
-			<strong>Squadra:</strong>
-			<a th:href="@{'/squadre/' + ${giocatore.squadraDiAppartenenza.id}}">
-				<span th:text="${giocatore.squadraDiAppartenenza.nome}"> Squadra </span>
-			</a>
+		    <strong>Squadra:</strong>
+		    <th:block th:if="${giocatore.squadraDiAppartenenza != null}">
+		        <a th:href="@{'/squadre/' + ${giocatore.squadraDiAppartenenza.id}}">
+		            <span th:text="${giocatore.squadraDiAppartenenza.nome}"> Squadra </span>
+		        </a>
+		    </th:block>
+		    <span th:unless="${giocatore.squadraDiAppartenenza != null}">Nessuna squadra</span>
 		</div>
 	</div>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

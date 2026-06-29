@@ -27,12 +27,11 @@
 	<div>
 		<a href="/tornei">tornei</a>
 	</div>
-	<div>
-		<a href="/login"> login </a>
-	</div>
-	<div>
-		<a href="/register"> registrati </a>
-	</div>
+	<th:block th:if="${userDetails != null and #strings.contains(userDetails.authorities, 'ROLE_ADMIN')}">
+	    <div>
+	        <a href="/admin/">Area amministrativa</a>
+	    </div>
+	</th:block>
 </body>
 
 </html>

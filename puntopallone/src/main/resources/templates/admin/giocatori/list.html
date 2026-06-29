@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Gestione Giocatori</title></head>
+<body>
+    <h1>Amministrazione Giocatori</h1>
+    <div th:if="${giocatori.isEmpty()}">Nessun giocatore presente.</div>
+    <ul>
+        <li th:each="giocatore : ${giocatori}">
+            <strong th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}"></strong>
+            <a th:href="@{'/admin/giocatori/' + ${giocatore.id} + '/edit'}">Modifica</a>
+            <a th:href="@{'/admin/giocatori/' + ${giocatore.id} + '/delete'}">Elimina</a>
+        </li>
+    </ul>
+    <a th:href="@{/admin/giocatori/new}">Nuovo Giocatore</a>
+	<div th:replace="~{fragments/footer :: adminfooter}"></div>
+</body>
+</html>

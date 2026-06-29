@@ -30,7 +30,7 @@ public class Utente {
     
 	//@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, length = 9)
+	@Column(nullable = false, length = 10)
 	private UserRole role;
 	
 	/* ASSOCIAZIONI */

@@ -8,6 +8,7 @@ import it.ur3.siw.model.enums.Stato;
 import it.ur3.siw.validation.ValidGoals;
 import it.ur3.siw.validation.ValidMatchDate;
 import it.ur3.siw.validation.ValidSquadreDiverse;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -55,25 +56,21 @@ public class Partita {
 	/* ASSOCIAZIONI */
 	
 	// Associazione con un singolo torneo
-	@NotNull
 	@ManyToOne
 	private Torneo torneoDiAppartenenza;
 	
 	// Associazione con due squadre
-	@NotNull
 	@ManyToOne
 	private Squadra squadraInCasa;
-	@NotNull
 	@ManyToOne
 	private Squadra squadraInTrasferta;
 		
 	// Associazione con un arbitro
-	@NotNull
 	@ManyToOne
 	private Arbitro arbitroInCarica;
 	
 	//Associazione con uno o più commenti
-	@OneToMany(mappedBy = "partitaCommentata")
+	@OneToMany(mappedBy = "partitaCommentata", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Commento> commentiDegliUtenti;
 
 	/* GETTERS E SETTERS */

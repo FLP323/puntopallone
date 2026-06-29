@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Gestione Tornei</title></head>
+<body>
+    <h1>Amministrazione Tornei</h1>
+    <div th:if="${tornei.isEmpty()}">Nessun torneo presente.</div>
+    <ul>
+        <li th:each="torneo : ${tornei}">
+            <strong th:text="${torneo.nome} + ' (' + ${torneo.anno} + ')'"></strong>
+            <a th:href="@{'/admin/tornei/' + ${torneo.id} + '/edit'}">Modifica</a>
+            <a th:href="@{'/admin/tornei/' + ${torneo.id} + '/delete'}">Elimina</a>
+        </li>
+    </ul>
+    <a th:href="@{/admin/tornei/new}">Nuovo Torneo</a>
+	<div th:replace="~{fragments/footer :: adminfooter}"></div>
+</body>
+</html>

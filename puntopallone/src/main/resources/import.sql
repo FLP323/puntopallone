@@ -100,3 +100,13 @@ insert into torneo_squadre_partecipanti(tornei_partecipati_id, squadre_partecipa
 -- World Cup (151) → Roma, Lazio
 insert into torneo_squadre_partecipanti(tornei_partecipati_id, squadre_partecipanti_id) values(151, 201);
 insert into torneo_squadre_partecipanti(tornei_partecipati_id, squadre_partecipanti_id) values(151, 251);
+
+-- ================================================
+-- ADMIN
+-- ================================================
+insert into utente(id, username, password, role) values(nextval('utente_seq'), 'paolo', '$2a$10$yWAIDyuEr78BBBFZ5cYh8.Nw4gUHFTRG5FwaWqNCGeOD8M4mh3.xy', 'ROLE_ADMIN')
+
+-- ================================================
+-- USER
+-- ================================================
+insert into utente(id, username, password, role) values(nextval('utente_seq'), 'utente1', '$2a$10$yWAIDyuEr78BBBFZ5cYh8.Nw4gUHFTRG5FwaWqNCGeOD8M4mh3.xy', 'ROLE_USER')

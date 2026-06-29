@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Conferma eliminazione</title></head>
+<body>
+    <h1>Sei sicuro di voler eliminare la partita?</h1>
+    <p th:if="${partita.squadraInCasa != null and partita.squadraInTrasferta != null}">
+        <span th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome}"></span>
+        (<span th:text="${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy HH:mm')}"></span>)
+    </p>
+    <form th:action="@{'/admin/partite/' + ${partita.id} + '/delete'}" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit">Sì, elimina</button>
+        <a th:href="@{/admin/partite}">Annulla</a>
+    </form>
+	<div th:replace="~{fragments/footer :: adminfooter}"></div>
+</body>
+</html>

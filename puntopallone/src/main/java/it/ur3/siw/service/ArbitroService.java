@@ -27,4 +27,10 @@ public class ArbitroService {
 	public Optional<Arbitro> findByIdWithPartite(Long id) {
 	    return arbitroRepository.findByIdWithPartite(id);
 	}
+	
+	@Transactional(readOnly = true)
+	public Optional<Arbitro> findById(Long id) {
+	    return arbitroRepository.findById(id);
+	}
+	
 }

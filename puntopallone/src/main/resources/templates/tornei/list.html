@@ -6,6 +6,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>Tornei</h1>
 	<div th:if="${listaTornei == null || listaTornei.isEmpty()}">Non ci sono tornei nel sistema</div>
 	<ul>
@@ -13,6 +14,7 @@
 			<a th:href="@{'/tornei/' + ${torneo.id}}" th:text="${torneo.nome} + ' ' + ${torneo.anno}">Nome torneo</a>
 		</li>
 	</ul>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

@@ -27,4 +27,30 @@ public class GiocatoreService {
 	public Optional<Giocatore> findById(Long id) {
 		return giocatoreRepository.findByIdWithSquadra(id);
 	}
+	
+	// In GiocatoreService.java
+
+	@Transactional
+	public Giocatore save(Giocatore giocatore) {
+	    return giocatoreRepository.save(giocatore);
+	}
+
+	@Transactional
+	public Giocatore update(Long id, Giocatore giocatoreAggiornato) {
+	    Giocatore giocatore = giocatoreRepository.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Giocatore non trovato"));
+	    giocatore.setNome(giocatoreAggiornato.getNome());
+	    giocatore.setCognome(giocatoreAggiornato.getCognome());
+	    giocatore.setDataDiNascita(giocatoreAggiornato.getDataDiNascita());
+	    giocatore.setRuolo(giocatoreAggiornato.getRuolo());
+	    giocatore.setAltezza(giocatoreAggiornato.getAltezza());
+	    return giocatoreRepository.save(giocatore);
+	}
+
+	@Transactional
+	public void delete(Long id) {
+	    Giocatore giocatore = giocatoreRepository.findById(id)
+	            .orElseThrow(() -> new IllegalArgumentException("Giocatore non trovato"));
+	    giocatoreRepository.delete(giocatore);
+	}
 }

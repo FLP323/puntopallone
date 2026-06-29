@@ -50,7 +50,6 @@ public class Giocatore {
 	/* ASSOCIAZIONI */
 	
 	// Associazione con una singola squadra
-	@NotNull
 	@ManyToOne
 	private Squadra squadraDiAppartenenza;
 	

@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>
 		Dettagli Torneo
 	</h1>
@@ -106,6 +107,7 @@
 			<ul th:if="${classifica.isEmpty()}">Nessuna squadra partecipante o nessuna partita giocata.</ul>
 		</div>
 	</div>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

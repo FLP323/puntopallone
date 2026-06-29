@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<div th:replace="~{fragments/header :: header}"></div>
 	<h1>
 		Dettagli Arbitro
 	</h1>
@@ -37,6 +38,7 @@
 			<ul th:if="${arbitro.partiteDoveArbitra.isEmpty()}"> Nessuna partita arbitrata </ul>
 		</div>
 	</div>
+	<div th:replace="~{fragments/footer :: publicfooter}"></div>
 </body>
 
 </html>

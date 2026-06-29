@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Conferma eliminazione</title></head>
+<body>
+    <h1>Sei sicuro di voler eliminare la squadra "<span th:text="${squadra.nome}"></span>"?</h1>
+    <form th:action="@{'/admin/squadre/' + ${squadra.id} + '/delete'}" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit">Sì, elimina</button>
+        <a th:href="@{/admin/squadre}">Annulla</a>
+    </form>
+	<div th:replace="~{fragments/footer :: adminfooter}"></div>
+</body>
+</html>
