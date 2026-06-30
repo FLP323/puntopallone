@@ -1,5 +1,6 @@
 package it.ur3.siw.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +19,12 @@ public interface TorneoRepository extends JpaRepository<Torneo, Long>{
 	
 	@Query("SELECT t FROM Torneo t LEFT JOIN FETCH t.partiteDelTorneo LEFT JOIN FETCH t.squadrePartecipanti WHERE t.id = :id")
 	Optional<Torneo> findByIdWithPartite(@Param("id") Long id);
-
+	
+	@Query("SELECT t FROM Torneo t WHERE " +
+		       "(:nome IS NULL OR LOWER(t.nome) LIKE LOWER(CONCAT('%', :nome, '%'))) AND " +
+		       "(:annoMin IS NULL OR t.anno >= :annoMin) AND " +
+		       "(:annoMax IS NULL OR t.anno <= :annoMax)")
+		List<Torneo> findByFilters(@Param("nome") String nome,
+		                           @Param("annoMin") Integer annoMin,
+		                           @Param("annoMax") Integer annoMax);
 }

@@ -3,6 +3,8 @@ package it.ur3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.ur3.siw.validation.NotFutureYear;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,16 +54,20 @@ public class Squadra {
 	/* ASSOCIAZIONI */
 	
 	// Associazione con zero o più tornei
+	@JsonIgnore
 	@ManyToMany(mappedBy = "squadrePartecipanti")
 	private Set<Torneo> torneiPartecipati;
 	
 	// Associzione con zero o più giocatori
+	@JsonIgnore
 	@OneToMany(mappedBy = "squadraDiAppartenenza")
 	private Set<Giocatore> rosa;
 	
 	// Associazione con zero o più partite
+	@JsonIgnore
 	@OneToMany(mappedBy = "squadraInCasa")
 	private Set<Partita> partiteInCasa;
+	@JsonIgnore
 	@OneToMany(mappedBy = "squadraInTrasferta")
 	private Set<Partita> partiteInTrasferta;
 	

@@ -102,7 +102,7 @@ public class TorneoService {
 
 	@Transactional
 	public Torneo update(Long id, Torneo torneoAggiornato, List<Long> squadreIds) {
-		Torneo torneo = torneoRepository.findByIdWithAssociazioni(id) // carica anche le squadre esistenti
+		Torneo torneo = torneoRepository.findByIdWithAssociazioni(id)
 				.orElseThrow(() -> new IllegalArgumentException("Torneo non trovato"));
 		torneo.setNome(torneoAggiornato.getNome());
 		torneo.setAnno(torneoAggiornato.getAnno());
@@ -114,7 +114,7 @@ public class TorneoService {
 					.map(sid -> squadraRepository.findById(sid)
 							.orElseThrow(() -> new IllegalArgumentException("Squadra non trovata: " + sid)))
 					.collect(Collectors.toSet());
-			// Sincronizza: rimuove le vecchie non più presenti e aggiunge le nuove
+			// rimuove le vecchie e aggiunge le nuove
 			torneo.getSquadrePartecipanti().clear();
 			torneo.getSquadrePartecipanti().addAll(nuoveSquadre);
 		}
@@ -131,5 +131,10 @@ public class TorneoService {
 	@Transactional(readOnly = true)
 	public Optional<Torneo> findById(Long id) {
 		return torneoRepository.findById(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Torneo> findByFilters(String nome, Integer annoMin, Integer annoMax) {
+	    return torneoRepository.findByFilters(nome, annoMin, annoMax);
 	}
 }

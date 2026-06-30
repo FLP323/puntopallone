@@ -3,6 +3,8 @@ package it.ur3.siw.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.ur3.siw.model.enums.PlayerRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,6 +52,7 @@ public class Giocatore {
 	/* ASSOCIAZIONI */
 	
 	// Associazione con una singola squadra
+	@JsonIgnore
 	@ManyToOne
 	private Squadra squadraDiAppartenenza;
 	

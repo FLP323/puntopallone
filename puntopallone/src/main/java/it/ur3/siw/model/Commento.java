@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Commento {
 
@@ -37,6 +39,7 @@ public class Commento {
 	/* ASSOCIAZIONI */
 
 	// Associazione con esattamente un utente
+	@JsonIgnore
 	@NotNull
 	@ManyToOne
 	private Utente commentatore;
@@ -44,6 +47,7 @@ public class Commento {
 	// Associazione con esattamente una partita
 	@NotNull
 	@ManyToOne
+	@JsonIgnore
 	private Partita partitaCommentata;
 
 	/* GETTERS E SETTERS */

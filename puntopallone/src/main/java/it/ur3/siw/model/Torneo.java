@@ -3,6 +3,8 @@ package it.ur3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.ur3.siw.validation.NotFutureYear;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,10 +41,12 @@ public class Torneo {
 	/* ASSOCIAZIONI */
 	
 	// Associazione con zero o più squadre
+	@JsonIgnore
 	@ManyToMany
 	private Set<Squadra> squadrePartecipanti;
 	
 	// Associazione con zero o più partite
+	@JsonIgnore
 	@OneToMany(mappedBy = "torneoDiAppartenenza")
 	private Set<Partita> partiteDelTorneo;
 	

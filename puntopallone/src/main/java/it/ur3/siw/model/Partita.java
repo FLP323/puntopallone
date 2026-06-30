@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.ur3.siw.model.enums.Stato;
 import it.ur3.siw.validation.ValidGoals;
 import it.ur3.siw.validation.ValidMatchDate;
@@ -56,20 +58,25 @@ public class Partita {
 	/* ASSOCIAZIONI */
 	
 	// Associazione con un singolo torneo
+	@JsonIgnore
 	@ManyToOne
 	private Torneo torneoDiAppartenenza;
 	
 	// Associazione con due squadre
+	@JsonIgnore
 	@ManyToOne
 	private Squadra squadraInCasa;
+	@JsonIgnore
 	@ManyToOne
 	private Squadra squadraInTrasferta;
 		
 	// Associazione con un arbitro
+	@JsonIgnore
 	@ManyToOne
 	private Arbitro arbitroInCarica;
 	
 	//Associazione con uno o più commenti
+	@JsonIgnore
 	@OneToMany(mappedBy = "partitaCommentata", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Commento> commentiDegliUtenti;
 
