@@ -104,9 +104,9 @@ insert into torneo_squadre_partecipanti(tornei_partecipati_id, squadre_partecipa
 -- ================================================
 -- ADMIN
 -- ================================================
-insert into utente(id, username, password, role) values(nextval('utente_seq'), 'paolo', '$2a$10$yWAIDyuEr78BBBFZ5cYh8.Nw4gUHFTRG5FwaWqNCGeOD8M4mh3.xy', 'ROLE_ADMIN')
+insert into utente(id, username, password, role) values(nextval('utente_seq'), 'admin', '$2a$10$hsgSNeY1qNf6u/VBDIx.dOYffZ31kZE01dIy0qZS2U84LleJm0l8e', 'ROLE_ADMIN')
 
 -- ================================================
 -- USER
 -- ================================================
-insert into utente(id, username, password, role) values(nextval('utente_seq'), 'utente1', '$2a$10$yWAIDyuEr78BBBFZ5cYh8.Nw4gUHFTRG5FwaWqNCGeOD8M4mh3.xy', 'ROLE_USER')
+insert into utente(id, username, password, role) values(nextval('utente_seq'), 'utente', '$2a$10$k.dsygDDCyrOGhOe2UO10Oc.qfnYo6T6iFnaKkJ94vOFOwUcapD0K', 'ROLE_USER')
