@@ -21,10 +21,10 @@ public interface TorneoRepository extends JpaRepository<Torneo, Long>{
 	Optional<Torneo> findByIdWithPartite(@Param("id") Long id);
 	
 	@Query("SELECT t FROM Torneo t WHERE " +
-		       "(:nome IS NULL OR LOWER(t.nome) LIKE LOWER(CONCAT('%', :nome, '%'))) AND " +
+		       "(:nomeLower IS NULL OR LOWER(t.nome) LIKE CONCAT('%', CAST(:nomeLower AS text), '%')) AND " +
 		       "(:annoMin IS NULL OR t.anno >= :annoMin) AND " +
 		       "(:annoMax IS NULL OR t.anno <= :annoMax)")
-		List<Torneo> findByFilters(@Param("nome") String nome,
+		List<Torneo> findByFilters(@Param("nomeLower") String nomeLower,
 		                           @Param("annoMin") Integer annoMin,
 		                           @Param("annoMax") Integer annoMax);
 }

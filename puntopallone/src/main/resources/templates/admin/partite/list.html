@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head><title>Gestione Partite</title></head>
+
+<head>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<title>Gestione Partite</title>
+</head>
+
 <body>
-    <h1>Amministrazione Partite</h1>
-    <div th:if="${partite.isEmpty()}">Nessuna partita presente.</div>
-    <ul>
-        <li th:each="partita : ${partite}">
-            <strong th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome}"></strong>
-            (<span th:text="${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy HH:mm')}"></span>)
-            <a th:href="@{'/admin/partite/' + ${partita.id} + '/edit'}">Modifica</a>
-            <a th:href="@{'/admin/partite/' + ${partita.id} + '/delete'}">Elimina</a>
-        </li>
-    </ul>
-    <a th:href="@{/admin/partite/new}">Nuova Partita</a>
+	<h1>Amministrazione Partite</h1>
+	<div th:if="${partite.isEmpty()}">Nessuna partita presente.</div>
+	<ul>
+		<li th:each="partita : ${partite}">
+			<strong th:text="${partita.squadraInCasa.nome} + ' vs ' + ${partita.squadraInTrasferta.nome}"></strong>
+			(<span th:text="${#temporals.format(partita.dataEOraInizioPartita, 'dd/MM/yyyy HH:mm')}"></span>)
+			<a th:href="@{'/admin/partite/' + ${partita.id} + '/edit'}">Modifica</a>
+			<a th:href="@{'/admin/partite/' + ${partita.id} + '/delete'}">Elimina</a>
+		</li>
+	</ul>
+	<a th:href="@{/admin/partite/new}">Nuova Partita</a>
 	<div th:replace="~{fragments/footer :: adminfooter}"></div>
 </body>
+
 </html>

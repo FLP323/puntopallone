@@ -1,0 +1,289 @@
+:root {
+    --verde-campo: #2e7d32;
+    --verde-chiaro: #4caf50;
+    --bianco: #ffffff;
+    --nero: #1a1a1a;
+    --grigio-chiaro: #f5f5f5;
+    --grigio-medio: #dddddd;
+    --grigio-scuro: #333333;
+    --arancio: #ff9800;
+    --arancio-scuro: #e65100;
+    --bordo: #c8e6c9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    background-color: var(--grigio-chiaro);
+    color: var(--nero);
+    line-height: 1.6;
+    padding-bottom: 40px;
+}
+
+/* ----- HEADER ----- */
+header {
+    background-color: var(--verde-campo);
+    color: var(--bianco);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+header a, header button {
+    color: var(--bianco);
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+header a:hover, header button:hover {
+    background-color: var(--verde-chiaro);
+}
+
+header .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ----- FOOTER ----- */
+footer {
+    background-color: var(--nero);
+    color: var(--bianco);
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--arancio);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ----- CONTENITORE PRINCIPALE ----- */
+.container {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--bianco);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: var(--verde-campo);
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--verde-campo);
+    padding-bottom: 6px;
+    display: inline-block;
+}
+
+h2, h3 {
+    color: var(--verde-campo);
+    margin: 20px 0 10px;
+}
+
+/* ----- LINK GENERICI ----- */
+a {
+    color: var(--verde-campo);
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--arancio-scuro);
+    text-decoration: underline;
+}
+
+/* ----- LISTE ----- */
+ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* ----- PULSANTI ----- */
+button, .btn {
+    background-color: var(--verde-campo);
+    color: var(--bianco);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--verde-chiaro);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--verde-campo);
+    color: var(--verde-campo);
+}
+
+.btn-outline:hover {
+    background-color: var(--verde-campo);
+    color: var(--bianco);
+}
+
+.btn-danger {
+    background-color: #c62828;
+}
+
+.btn-danger:hover {
+    background-color: #b71c1c;
+}
+
+/* ----- FORM ----- */
+form {
+    margin: 15px 0;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid var(--grigio-medio);
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--verde-campo);
+    box-shadow: 0 0 4px rgba(46,125,50,0.3);
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+    color: var(--grigio-scuro);
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: -8px;
+    margin-bottom: 8px;
+}
+
+/* ----- TABELLE ----- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+th {
+    background-color: var(--verde-campo);
+    color: var(--bianco);
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid var(--bordo);
+    text-align: center;
+}
+
+tr:nth-child(even) td {
+    background-color: #f1f8e9;
+}
+
+/* ----- COMMENTI ----- */
+.commento {
+    border-bottom: 1px solid var(--grigio-medio);
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.commento .autore {
+    font-weight: 700;
+    color: var(--verde-campo);
+}
+
+.commento .data {
+    font-size: 0.8rem;
+    color: var(--grigio-scuro);
+}
+
+/* ----- MESSAGGI DI FEEDBACK ----- */
+.alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #b71c1c;
+    border: 1px solid #ef9a9a;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+}
+
+/* ----- LAYOUT A DUE COLONNE ----- */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ----- LINK "AREA AMMINISTRATIVA" ----- */
+.admin-link {
+    background-color: var(--arancio);
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: var(--nero);
+    font-weight: 700;
+}
+
+.admin-link:hover {
+    background-color: var(--arancio-scuro);
+    color: white;
+}

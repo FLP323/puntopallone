@@ -135,6 +135,7 @@ public class TorneoService {
 	
 	@Transactional(readOnly = true)
 	public List<Torneo> findByFilters(String nome, Integer annoMin, Integer annoMax) {
-	    return torneoRepository.findByFilters(nome, annoMin, annoMax);
+	    String nomeLower = (nome != null && !nome.isEmpty()) ? nome.toLowerCase() : null;
+	    return torneoRepository.findByFilters(nomeLower, annoMin, annoMax);
 	}
 }

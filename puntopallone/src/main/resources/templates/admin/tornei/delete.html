@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head><title>Conferma eliminazione</title></head>
+<head>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<title>Conferma eliminazione</title>
+</head>
 <body>
     <h1>Sei sicuro di voler eliminare il torneo "<span th:text="${torneo.nome}"></span>"?</h1>
     <form th:action="@{'/admin/tornei/' + ${torneo.id} + '/delete'}" method="POST">

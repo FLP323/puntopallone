@@ -48,8 +48,8 @@ public class SecurityConfiguration {
 			authorize.requestMatchers(HttpMethod.GET, "/", "/homepage", "/register", "/login", "/css/**", "/images/**").permitAll();
 			authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
 			// [ALMENO USER] funzionalità dell'utente registrato (GET e POST)
-			authorize.requestMatchers(HttpMethod.GET, "/partite/*/commento", "/commento/*/edit").hasAnyAuthority(UserRole.ROLE_USER.name(), UserRole.ROLE_ADMIN.name());
-			authorize.requestMatchers(HttpMethod.POST, "/partite/*/commento", "/commento/*/edit").hasAnyAuthority(UserRole.ROLE_USER.name(), UserRole.ROLE_ADMIN.name());
+			authorize.requestMatchers(HttpMethod.GET, "/partite/*/commento", "/commento/*/edit").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
+			authorize.requestMatchers(HttpMethod.POST, "/partite/*/commento", "/commento/*/edit").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 			// [TUTTI] funzionalità dell'utente qualsiasi (GET)
 			authorize.requestMatchers(HttpMethod.GET, "/arbitri", "/arbitri/**"
 													, "/giocatori", "/giocatori/**"
@@ -58,9 +58,9 @@ public class SecurityConfiguration {
 													, "/tornei", "/tornei/**", "/rest/**").permitAll();
 			
 			// Sezione utente registrato generica
-			authorize.requestMatchers("/utente/**").hasAnyAuthority(UserRole.ROLE_USER.name(), UserRole.ROLE_ADMIN.name());
+			authorize.requestMatchers("/utente/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN");
 			// Sezione admin generica
-			authorize.requestMatchers("/admin/**").hasAnyAuthority(UserRole.ROLE_ADMIN.name());
+			authorize.requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN");
 			// Tutto il resto richiede autenticazione
 			authorize.anyRequest().authenticated();
 		});
